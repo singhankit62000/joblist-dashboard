@@ -1,0 +1,50 @@
+.job-item-card {
+    &:hover {
+        cursor: pointer;
+        background-color: white;
+        transition: transform 0.15s ease-in-out;
+        transform: scale3d(1.05, 1.05, 1);
+    }
+}
+
+.job-duration {
+    background-color: transparent;
+    color: black;
+    font-size: x-small;
+    border: 0.01px solid rgb(219, 216, 216);
+    padding: 0px 5px;
+    border-radius: 5000px;
+    font-weight: 200;
+    height: 20px;
+    line-height: 20px;
+    width: fit-content;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.header-details {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.header-company-name {
+    margin: 0;
+    line-height: 20px;
+    color: rgb(153, 153, 153);
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.header-role {
+    margin: 0;
+    font-weight: 300;
+}
+
+.header-location {
+    font-size: 11px;
+    margin-top: 4px;
+}
