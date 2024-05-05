@@ -1,61 +1,61 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { CardHeader, Fab } from '@mui/material';
+import JdModal from './JdModal';
 
 import './JobItem.css';
 
-function JobItem() {
+function JobItem({jobItem, open, handleOpenModal}) {
+
+  const handleEasyApply = () => {
+    window.location.href = jobItem.jdLink; // Replace with your desired URL
+  };
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} className='job-item-card'>
       <div className='job-duration' variant='extended' size='small'>
         ⌛Posted 10 days ago
       </div>
       <div className='header-container'>
         <Avatar
             alt="company logo"
-            src="https://logo.clearbit.com/dropbox.com"
-            sx={{ width: 24, height: 24 }}
+            src={jobItem.logoUrl}
+            sx={{ width: 30, height: 30 }}
             variant="square"
         />
         <div className='header-details'>
-          <h3 className='header-company-name'>Zuma</h3>
-          <h4 className='header-role'>Founding Staff Frontend Software</h4>
-          <p className='header-location'>Bengaluru</p>
+          <h3 className='header-company-name'>{jobItem.companyName}</h3>
+          <h4 className='header-role'>{jobItem.jobRole}</h4>
+          <p className='header-location'>{jobItem.location}</p>
         </div>
       </div>
-      {/* <CardHeader
-        avatar = {
-            <Avatar
-                alt="company logo"
-                src="https://logo.clearbit.com/dropbox.com"
-                sx={{ width: 24, height: 24 }}
-                variant="square"
-            />
-        }
-        title="Company Name"
-        subheader="Role"
-      /> */}
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
+      <p className='job-salary'>Estimated Salary: ₹{jobItem.minJdSalary? jobItem.minJdSalary: "0"} - {jobItem.maxJdSalary? jobItem.maxJdSalary: "0"} LPA ✅</p>
+      <div className='job-content'>
+        <h3 className='job-about'>About Company:</h3>
+        <p className='job-details'>{jobItem.jobDetailsFromCompany}</p>
+        <JdModal jobDesc={jobItem.jobDetailsFromCompany} open={open} handleOpenModal={handleOpenModal}/>
+      </div>
+      <div className='job-card-footer'>
+        <p className='footer-head'>Minimum Experience</p> 
+        <p className='footer-text'>{jobItem.minExp? ((jobItem.minExp > 1) ? jobItem.minExp + ' years' : 0 + ' year') : 0 + ' year'}</p>
+      </div>
+      <button className='easy-apply-btn' onClick={handleEasyApply}>⚡Easy Apply</button>
+      <div className='referral-btn' onClick={handleEasyApply}>
+        <div className='referral-avatar'>
+        <Avatar
+            alt="company logo"
+            src={jobItem.logoUrl}
+            sx={{ width: 30, height: 30 }}
+        />
+        <Avatar
+            alt="company logo"
+            src={jobItem.logoUrl}
+            sx={{ width: 30, height: 30 }}
+        />
+        </div>
+        <p className='referral-text'>Unlock referral asks</p>
+      </div>
     </Card>
     </div>
   )
