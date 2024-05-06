@@ -8,7 +8,7 @@ import './JobItem.css';
 function JobItem({jobItem, open, handleOpenModal}) {
 
   const handleEasyApply = () => {
-    window.location.href = jobItem.jdLink; // Replace with your desired URL
+    window.location.href = jobItem.jdLink;
   };
 
   return (
@@ -30,11 +30,11 @@ function JobItem({jobItem, open, handleOpenModal}) {
           <p className='header-location'>{jobItem.location}</p>
         </div>
       </div>
-      <p className='job-salary'>Estimated Salary: ₹{jobItem.minJdSalary? jobItem.minJdSalary: "0"} - {jobItem.maxJdSalary? jobItem.maxJdSalary: "0"} LPA ✅</p>
+      <p className='job-salary'>Estimated Salary: {jobItem.salaryCurrencyCode} {jobItem.minJdSalary? jobItem.minJdSalary: "0"} - {jobItem.maxJdSalary? jobItem.maxJdSalary: "0"} LPA ✅</p>
       <div className='job-content'>
         <h3 className='job-about'>About Company:</h3>
         <p className='job-details'>{jobItem.jobDetailsFromCompany}</p>
-        <JdModal jobDesc={jobItem.jobDetailsFromCompany} open={open} handleOpenModal={handleOpenModal}/>
+        <JdModal jobItem={jobItem} open={open} handleOpenModal={handleOpenModal}/>
       </div>
       <div className='job-card-footer'>
         <p className='footer-head'>Minimum Experience</p> 
@@ -44,13 +44,13 @@ function JobItem({jobItem, open, handleOpenModal}) {
       <div className='referral-btn' onClick={handleEasyApply}>
         <div className='referral-avatar'>
         <Avatar
-            alt="company logo"
-            src={jobItem.logoUrl}
+            alt="referrer avatar"
+            src='ava-1.png'
             sx={{ width: 30, height: 30 }}
         />
         <Avatar
-            alt="company logo"
-            src={jobItem.logoUrl}
+            alt="referrer avatar"
+            src='ava-2.png'
             sx={{ width: 30, height: 30 }}
         />
         </div>

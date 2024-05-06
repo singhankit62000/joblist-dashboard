@@ -6,3 +6,21 @@
     padding: 10px;
     margin-top: 2rem;
 }
+
+.filter-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 200px !important;
+    width: 100%;
+}
+
+.joblist-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+    margin-top: 2rem;
+}

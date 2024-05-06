@@ -3,17 +3,20 @@ import JobItem from './JobItem';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./JobList.css";
+import JobFilter from './JobFilter';
+import { CircularProgress } from '@mui/material';
 
 const JobList = () => {
 
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [offset, setOffset] = useState(0);
+    const [filteredData, setFilteredData] = useState([]);
 
     let totalCount = 0;
 
+    // Modal's open state is used inside the JobItem component for the View more option
     const [open, setOpen] = useState(false);
-
     const handleOpenModal = () => {
       setOpen(!open);
     };
@@ -21,6 +24,7 @@ const JobList = () => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
+    // Helper function for Infinite scroll for fetching more data on page end.
     const fetchMoreData = async () => {
       try {
         setIsLoading(true);
@@ -54,6 +58,7 @@ const JobList = () => {
       }
     };
 
+    // useEffect for fetching the 1st batch of data
     useEffect(() => {
       async function fetchData() {
         const body = JSON.stringify({
@@ -86,20 +91,24 @@ const JobList = () => {
       }
   
       fetchData();
-    }, [offset]);
+    }, []);
 
   return (
     <div>
+      {/* Infinite Scroll component */}
       <InfiniteScroll
           className='list-container'
-          dataLength={data.length}
+          dataLength={filteredData.length}
           next={fetchMoreData}
-          hasMore={data.length !== totalCount}
-          loader={(isLoading) ? <h4>Loading...</h4> : ""}
+          hasMore={filteredData.length !== totalCount}
+          loader={(isLoading) ? <h4><CircularProgress /></h4> : ""}
       >
-      {data && data.map((jobItem) => (
-        <JobItem key={jobItem.jdUid} jobItem={jobItem} open={open} handleOpenModal={handleOpenModal}/>
-      ))}
+      <JobFilter className='filter-bar' data={data} setFilteredData={setFilteredData} />
+      <div className='joblist-cards'>
+        {filteredData && filteredData.map((jobItem) => (
+          <JobItem key={jobItem.jdUid} jobItem={jobItem} open={open} handleOpenModal={handleOpenModal}/>
+        ))}
+      </div>
       </InfiniteScroll>
     </div>
   )
