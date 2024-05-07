@@ -5,11 +5,15 @@ import JdModal from './JdModal';
 
 import './JobItem.css';
 
-function JobItem({jobItem, open, handleOpenModal}) {
+function JobItem({jobItem, modalJob, open, handleOpenModal}) {
 
   const handleEasyApply = () => {
     window.location.href = jobItem.jdLink;
   };
+
+  const handleJDModal = () => {
+    handleOpenModal(jobItem);
+  }
 
   return (
     <div>
@@ -34,7 +38,7 @@ function JobItem({jobItem, open, handleOpenModal}) {
       <div className='job-content'>
         <h3 className='job-about'>About Company:</h3>
         <p className='job-details'>{jobItem.jobDetailsFromCompany}</p>
-        <JdModal jobItem={jobItem} open={open} handleOpenModal={handleOpenModal}/>
+        <JdModal key={jobItem.jdUid} jobItem={modalJob} open={open} handleJDModal={handleJDModal}/>
       </div>
       <div className='job-card-footer'>
         <p className='footer-head'>Minimum Experience</p> 

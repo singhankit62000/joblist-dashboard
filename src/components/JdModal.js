@@ -5,17 +5,21 @@ import { Avatar } from '@mui/material';
 import './JdModal.css'
 import './JobItem.css'
 
-export default function JdModal({jobItem, open, handleOpenModal}) {
+export default function JdModal({jobItem, open, handleJDModal}) {
   const handleEasyApply = () => {
     window.location.href = jobItem.jdLink;
   };
 
+  const handleModalClick = () => {
+    handleJDModal(jobItem);
+  }
+
   return (
     <div>
-      <button onClick={handleOpenModal} className='job-view-btn'>View job</button> 
+      <button onClick={handleModalClick} className='job-view-btn'>View job</button> 
       <Modal
         open={open}
-        onClose={handleOpenModal}
+        onClose={handleJDModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className='jdmodal'

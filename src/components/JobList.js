@@ -17,7 +17,10 @@ const JobList = () => {
 
     // Modal's open state is used inside the JobItem component for the View more option
     const [open, setOpen] = useState(false);
-    const handleOpenModal = () => {
+    const [modalJob, setModalJob] = useState({});
+
+    const handleOpenModal = (jobItem) => {
+      setModalJob(jobItem);
       setOpen(!open);
     };
 
@@ -106,7 +109,7 @@ const JobList = () => {
       <JobFilter className='filter-bar' data={data} setFilteredData={setFilteredData} />
       <div className='joblist-cards'>
         {filteredData && filteredData.map((jobItem) => (
-          <JobItem key={jobItem.jdUid} jobItem={jobItem} open={open} handleOpenModal={handleOpenModal}/>
+          <JobItem key={jobItem.jdUid} jobItem={jobItem} modalJob={modalJob} open={open} handleOpenModal={handleOpenModal}/>
         ))}
       </div>
       </InfiniteScroll>
